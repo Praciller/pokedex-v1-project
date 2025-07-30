@@ -283,8 +283,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact & Support
 
-- **Developer**: [Pakon Poomson]
-- **Email**: [pakon.poomson@gmail.com]
+- **Developer**: Pakon Poomson
+- **Email**: pakon.poomson@gmail.com
 - **GitHub**: [@Praciller](https://github.com/Praciller)
 - **Project Link**: [https://github.com/Praciller/pokedex-v1-project](https://github.com/Praciller/pokedex-v1-project)
 
