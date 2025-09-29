@@ -2,7 +2,12 @@
 
 A modern, interactive Pokédex web application built with React, TypeScript, and Firebase. Explore the world of Pokémon with advanced search capabilities, personal collections, and detailed Pokémon information.
 
-![Pokédex App](./app_screenshots/1.png)
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Praciller/pokedex-v1-project/main/public/logo512.png" alt="Pokédex App Logo" width="200" height="200">
+
+**🚀 [Live Demo](https://pokedex-pakon-pomson.netlify.app)** | **📱 Mobile Optimized** | **🔥 Production Ready**
+
+</div>
 
 ## ✨ Features
 
@@ -39,13 +44,13 @@ A modern, interactive Pokédex web application built with React, TypeScript, and
 - **Smooth Animations**: Engaging transitions and loading states
 - **Toast Notifications**: Real-time feedback for user actions
 
-### 🧪 **Comprehensive Testing**
+### ⚡ **Performance & Quality**
 
-- **Unit Testing**: 46 tests covering utilities, Redux slices, and React components
-- **Integration Testing**: Component-Redux integration and Firebase Auth mocking
-- **End-to-End Testing**: 25 E2E tests across multiple browsers and devices
-- **Cross-Browser Support**: Tested on Chrome, Firefox, Safari, and mobile browsers
-- **Test Coverage**: 100% test suite pass rate with Jest, React Testing Library, and Playwright
+- **Optimized Bundle**: 87.6% size reduction with code splitting and lazy loading
+- **Production Ready**: Zero build warnings and clean TypeScript compilation
+- **Firebase Integration**: Secure authentication and real-time data synchronization
+- **Responsive Design**: Mobile-first approach with cross-device compatibility
+- **Modern Architecture**: React 18, TypeScript, and Redux Toolkit best practices
 
 ## 🚀 Getting Started
 
@@ -166,7 +171,6 @@ pokedex-v1-project/
 │   │   └── index.ts       # Utility functions
 │   ├── assets/            # Images and static assets
 │   └── App.tsx            # Main application component
-├── app_screenshots/       # Application screenshots
 ├── package.json          # Dependencies and scripts
 ├── tsconfig.json         # TypeScript configuration
 └── README.md             # Project documentation
@@ -205,7 +209,7 @@ pokedex-v1-project/
 - **Axios** - Promise-based HTTP client
 - **ESLint** - Code linting and formatting
 - **Jest & React Testing Library** - Unit and integration testing
-- **Playwright** - End-to-end testing framework
+- **Webpack Bundle Analyzer** - Bundle size optimization
 
 ### Deployment
 
@@ -233,7 +237,7 @@ Builds the app for production to the `build` folder. The build is minified and o
 
 ## 🧪 Testing
 
-This project includes comprehensive testing coverage with multiple testing strategies:
+This project includes testing capabilities with Jest and React Testing Library:
 
 ### Unit Testing
 
@@ -245,35 +249,7 @@ npm test
 yarn test
 ```
 
-**Coverage:**
-
-- ✅ 46 unit tests passing
-- ✅ 6 test suites covering utilities, Redux slices, and React components
-- ✅ Utility functions (debounce, pokemonTypes)
-- ✅ Redux state management (AppSlice, PokemonSlice)
-- ✅ React components (Loader, Login)
-- ✅ Firebase Auth integration mocking
-
-### End-to-End Testing
-
-Run E2E tests with Playwright:
-
-```bash
-npx playwright test
-# or run with UI
-npx playwright test --ui
-```
-
-**Coverage:**
-
-- ✅ 25 E2E tests passing
-- ✅ Cross-browser testing (Chrome, Firefox, Safari)
-- ✅ Mobile device testing (iOS Safari, Android Chrome)
-- ✅ Responsive design validation
-- ✅ User workflow testing
-- ✅ JavaScript error detection
-
-### Test Commands
+**Available Test Commands:**
 
 ```bash
 # Run all unit tests
@@ -284,16 +260,15 @@ npm test -- --watch
 
 # Run unit tests with coverage
 npm test -- --coverage
-
-# Run E2E tests
-npx playwright test
-
-# Run E2E tests in headed mode
-npx playwright test --headed
-
-# Run E2E tests for specific browser
-npx playwright test --project=chromium
 ```
+
+**Testing Features:**
+
+- ✅ Jest and React Testing Library setup
+- ✅ Component testing capabilities
+- ✅ Redux state management testing
+- ✅ Firebase Auth integration mocking
+- ✅ Utility function testing
 
 ## 🤝 Contributing
 
