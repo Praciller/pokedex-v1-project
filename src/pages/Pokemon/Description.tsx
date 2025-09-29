@@ -10,7 +10,12 @@ function Description() {
   return (
     <>
       <Info data={pokemonData} />
-      {pokemonData && <PokemonContainer image={pokemonData.image} />}
+      {pokemonData && (
+        <PokemonContainer
+          pokemonId={pokemonData.id}
+          pokemonName={pokemonData.name}
+        />
+      )}
     </>
   );
 }

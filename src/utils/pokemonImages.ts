@@ -1,23 +1,49 @@
 // @ts-nocheck
-const fetchImages = (context: string) => {
-  const images = {};
-  const cache = {};
-  function importAll(r) {
-    r.keys().forEach((key) => (cache[key] = r(key)));
+// Lazy image loading - only load images when needed
+const imageCache = new Map();
+
+// Function to dynamically import images only when needed
+export const getImage = async (
+  id: number,
+  isShiny: boolean = false
+): Promise<string> => {
+  const cacheKey = `${id}-${isShiny ? "shiny" : "default"}`;
+
+  if (imageCache.has(cacheKey)) {
+    return imageCache.get(cacheKey);
   }
-  importAll(context);
-  Object.entries(cache).forEach((module: string[]) => {
-    let key = module[0].split("");
-    key.splice(0, 2);
-    key.splice(-4, 4);
-    images[[key.join("")]] = module[1];
-  });
-  return images;
+
+  try {
+    const folder = isShiny ? "shiny" : "default";
+    // Try different file extensions
+    const extensions = ["png", "jpg", "jpeg", "svg"];
+
+    for (const ext of extensions) {
+      try {
+        const image = await import(`../assets/pokemons/${folder}/${id}.${ext}`);
+        const imageUrl = image.default;
+        imageCache.set(cacheKey, imageUrl);
+        return imageUrl;
+      } catch (error) {
+        // Continue to next extension
+        continue;
+      }
+    }
+
+    // Fallback to a default Pokemon image if specific image not found
+    const fallbackImage = await import("../assets/pokeball-icon.png");
+    const fallbackUrl = fallbackImage.default;
+    imageCache.set(cacheKey, fallbackUrl);
+    return fallbackUrl;
+  } catch (error) {
+    console.warn(`Failed to load image for Pokemon ${id}:`, error);
+    // Return a fallback image
+    const fallbackImage = await import("../assets/pokeball-icon.png");
+    return fallbackImage.default;
+  }
 };
 
-export const images = fetchImages(
-  require.context("../assets/pokemons/shiny", false, /\.(png|jpe?g|svg)$/)
-);
-export const defaultImages = fetchImages(
-  require.context("../assets/pokemons/default", false, /\.(png|jpe?g|svg)$/)
-);
+// For backward compatibility - these will be empty objects
+// Components should use getImage() instead
+export const images = {};
+export const defaultImages = {};

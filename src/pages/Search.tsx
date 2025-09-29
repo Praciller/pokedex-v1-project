@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useCallback } from "react";
 import Wrapper from "../sections/Wrapper";
 import { debounce } from "../utils";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
@@ -12,12 +12,35 @@ import { setLoading } from "../app/slices/AppSlice";
 import PokemonCardGrid from "../components/PokemonCardGrid";
 
 function Search() {
-  const handleChange = debounce((value: string) => getPokemon(value), 300);
-  const isLoading = useAppSelector(({ app: { isLoading } }) => isLoading);
-
   const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(({ app: { isLoading } }) => isLoading);
   const { allPokemon, randomPokemons } = useAppSelector(
     ({ pokemon }) => pokemon
+  );
+
+  // Memoize the getPokemon function to prevent unnecessary re-creations
+  const getPokemon = useCallback(
+    async (value: string) => {
+      if (value.length) {
+        const pokemons = allPokemon.filter((pokemon) =>
+          pokemon.name.includes(value.toLowerCase())
+        );
+        dispatch(getPokemonsData(pokemons));
+      } else {
+        const clonedPokemons = [...allPokemon];
+        const randomPokemonsId = clonedPokemons
+          .sort(() => Math.random() - Math.random())
+          .slice(0, 20);
+        dispatch(getPokemonsData(randomPokemonsId));
+      }
+    },
+    [allPokemon, dispatch]
+  );
+
+  // Memoize the debounced handler
+  const handleChange = useMemo(
+    () => debounce((value: string) => getPokemon(value), 300),
+    [getPokemon]
   );
 
   useEffect(() => {
@@ -39,21 +62,6 @@ function Search() {
       dispatch(setLoading(false));
     }
   }, [randomPokemons, dispatch]);
-
-  const getPokemon = async (value: string) => {
-    if (value.length) {
-      const pokemons = allPokemon.filter((pokemon) =>
-        pokemon.name.includes(value.toLowerCase())
-      );
-      dispatch(getPokemonsData(pokemons));
-    } else {
-      const clonedPokemons = [...allPokemon];
-      const randomPokemonsId = clonedPokemons
-        .sort(() => Math.random() - Math.random())
-        .slice(0, 20);
-      dispatch(getPokemonsData(randomPokemonsId));
-    }
-  };
 
   return (
     <>

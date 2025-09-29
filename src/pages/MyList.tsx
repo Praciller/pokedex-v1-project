@@ -9,9 +9,11 @@ function MyList() {
   const { userInfo } = useAppSelector(({ app }) => app);
   const { userPokemons } = useAppSelector(({ pokemon }) => pokemon);
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     dispatch(getUserPokemons());
   }, [userInfo, dispatch]);
+
   return (
     <div className="list">
       {userInfo ? <PokemonCardGrid pokemons={userPokemons} /> : <Login />}

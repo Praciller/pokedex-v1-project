@@ -9,6 +9,7 @@ import { setPokemonTab, setToast } from "../app/slices/AppSlice";
 import { addPokemonToList } from "../app/reducers/addPokemonToList";
 import { pokemonTabs } from "../utils/constants";
 import { pokemonTypeInterface, userPokemonsType } from "../utils/types";
+import LazyImage from "./LazyImage";
 function PokemonCardGrid({ pokemons }: { pokemons: userPokemonsType[] }) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -57,11 +58,12 @@ function PokemonCardGrid({ pokemons }: { pokemons: userPokemonsType[] }) {
                   />
                 </div>
                 <h3 className="pokemon-card-title">{data.name}</h3>
-                <img
-                  src={data.image}
-                  alt=""
+                <LazyImage
+                  pokemonId={data.id}
+                  alt={data.name}
                   className="pokemon-card-image"
                   loading="lazy"
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
                     dispatch(setPokemonTab(pokemonTabs.description));
                     dispatch(setCurrentPokemon(undefined));
