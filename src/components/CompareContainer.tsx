@@ -10,6 +10,7 @@ import {
   pokemonTypeInterface,
   userPokemonsType,
 } from "../utils/types";
+import LazyImage from "./LazyImage";
 function CompareContainer({
   pokemon = undefined,
   isEmpty = false,
@@ -106,9 +107,9 @@ function CompareContainer({
           <div className="compare-info">
             <div className="compare-details">
               <h3>{pokemon?.name}</h3>
-              <img
-                src={pokemon?.image}
-                alt="pokemon"
+              <LazyImage
+                pokemonId={pokemon?.id}
+                alt={pokemon?.name}
                 className="compare-image"
               />
             </div>
